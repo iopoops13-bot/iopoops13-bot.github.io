@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lootix — сайты под ключ</title>
+<meta name="description" content="Lootix — сайты под ключ: лендинги, сайты-каталоги, визитки, портфолио, многостраничные сайты и редизайн. Обсудим проект в Telegram.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lootix — сайты под ключ">
+<meta property="og:description" content="Лендинги, сайты-каталоги, визитки, портфолио, многостраничные сайты и редизайн. Обсудим проект в Telegram.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='5' y='5' width='22' height='22' rx='6' fill='%23111' transform='rotate(-8 16 16)'/%3E%3C/svg%3E">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Rubik+Dirt&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#111; --ink-2:#3b3b3b; --muted:#4a4a4a;
+    --glass:rgba(255,255,255,.3); --glass-2:rgba(255,255,255,.42);
+    --line:rgba(255,255,255,.7); --line-d:rgba(0,0,0,.14);
+    --r:28px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:#cfcfcc;min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+
+  /* ============ ФОН: комната → силуэт → запотевшее стекло ============ */
+  .room{position:fixed;inset:-8%;z-index:-6;
+    background:
+      radial-gradient(38% 30% at 18% 16%, #f1f1ee 0%, transparent 70%),
+      radial-gradient(34% 26% at 92% 10%, #9e9e9b 0%, transparent 70%),
+      radial-gradient(40% 32% at 10% 72%, #8c8c89 0%, transparent 70%),
+      radial-gradient(50% 40% at 55% 95%, #a3a3a0 0%, transparent 70%),
+      radial-gradient(30% 25% at 42% 46%, #c4c4c1 0%, transparent 70%),
+      #bdbdba;
+    filter:url(#marble) blur(34px);will-change:transform}
+  #fog,#wet{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}
+  #fog{z-index:-4;opacity:.58}
+  .mist{position:fixed;inset:0;z-index:-4;pointer-events:none;background:linear-gradient(180deg,transparent 45%,rgba(242,242,239,.45))}
+  #wet{z-index:-3}
+  .grain{position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.1;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+  .wrap{width:min(1180px,100% - 32px);margin-inline:auto}
+  .glass{background:var(--glass);border:1px solid var(--line);border-radius:var(--r);
+    box-shadow:0 1px 0 rgba(255,255,255,.6) inset, 0 20px 50px rgba(0,0,0,.06)}
+
+  /* ============ шапка ============ */
+  header{position:sticky;top:12px;z-index:20;margin-top:12px}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 14px 12px 22px;border-radius:999px}
+  .logo{font-weight:900;font-size:21px;letter-spacing:-.03em;display:flex;align-items:center;gap:9px}
+  .logo i{width:22px;height:22px;border-radius:6px;background:var(--ink);display:inline-block;transform:rotate(-8deg);box-shadow:3px 3px 0 #9a9a97}
+  .nav ul{display:flex;gap:26px;list-style:none;font-weight:500;font-size:15px}
+  .nav ul a{opacity:.7}.nav ul a:hover,.nav ul a:focus-visible{opacity:1}
+  a:focus-visible,summary:focus-visible{outline:2px solid #111;outline-offset:3px}
+  section[id]{scroll-margin-top:90px}
+  .tgbtn{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-weight:600;font-size:14px}
+  .tgbtn svg{width:16px;height:16px}
+
+  /* ============ общее ============ */
+  section{padding:26px 0}
+  .card{padding:clamp(22px,4vw,44px)}
+  .top{display:flex;justify-content:space-between;font-weight:700;font-size:15px;margin-bottom:clamp(18px,3vw,28px);color:var(--ink-2)}
+  .mega{font-weight:900;line-height:.86;letter-spacing:-.055em;font-size:clamp(58px,13vw,170px)}
+  .mega .tag{display:inline-block;vertical-align:top;font-size:.18em;letter-spacing:0;background:#fff;padding:.2em .45em;border-radius:10px;
+    transform:rotate(6deg) translateY(.7em);box-shadow:4px 4px 0 var(--ink);margin-left:.2em}
+  .h2{font-weight:900;line-height:.9;letter-spacing:-.045em;font-size:clamp(44px,8vw,100px);margin-bottom:20px}
+  .lead{font-size:clamp(17px,2vw,23px);line-height:1.35;color:var(--ink-2);max-width:760px}
+  .slogan{font-weight:800;letter-spacing:-.03em;line-height:1.02;font-size:clamp(26px,4vw,50px);margin:26px 0 18px;max-width:900px}
+  .slogan mark{background:var(--ink);color:#fff;padding:0 .18em;border-radius:8px;display:inline-block;transform:rotate(-1.5deg)}
+  .dirt{font-family:"Rubik Dirt",Inter,sans-serif;font-weight:400}
+
+  .pill{display:inline-flex;align-items:center;gap:16px;padding:13px 22px;border:1.5px solid var(--ink);border-radius:999px;font-weight:600;font-size:16px;transition:.2s;white-space:nowrap}
+  .pill svg{width:60px;height:12px;transition:.25s;flex:none}
+  .pill:hover{background:var(--ink);color:#fff}
+  .pill:hover svg{transform:translateX(5px)}
+  .pill.solid{background:var(--ink);color:#fff}
+  .pill.solid:hover{background:#fff;color:var(--ink)}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+
+  .ticker{margin-top:16px;overflow:hidden;background:var(--ink);color:#fff;border-radius:999px;transform:rotate(-.8deg)}
+  .ticker-in{display:flex;width:max-content;animation:tick 34s linear infinite}
+  .ticker span{padding:10px 0;font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:.03em;white-space:nowrap}
+  .ticker span::after{content:"✳";margin:0 22px;color:#9a9a97}
+  @keyframes tick{to{transform:translateX(-50%)}}
+
+  /* ============ каталог ============ */
+  .catalog{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .item{display:flex;flex-direction:column;border-radius:24px;overflow:hidden;background:var(--glass-2);border:1px solid var(--line);transition:transform .25s, box-shadow .25s}
+  .item:hover{transform:translateY(-4px);box-shadow:0 24px 50px rgba(0,0,0,.1)}
+  .thumb{position:relative;aspect-ratio:4/3;overflow:hidden;isolation:isolate;color:var(--ink)}
+  .thumb .num{position:absolute;right:14px;top:12px;font-weight:700;font-size:13px;z-index:4}
+  .thumb .grain2{position:absolute;inset:0;z-index:3;mix-blend-mode:multiply;opacity:.5;pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='4'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.6 1.1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .rough{filter:url(#rough)}
+  .info{padding:20px 22px 22px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .info h3{font-size:26px;font-weight:800;letter-spacing:-.035em;line-height:1}
+  .info p{color:var(--ink-2);font-size:15px;line-height:1.45}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+  .tags span{font-size:12.5px;font-weight:600;padding:5px 10px;border-radius:999px;border:1px solid var(--line-d);background:rgba(255,255,255,.5)}
+  .meta{display:flex;justify-content:space-between;font-size:13.5px;color:var(--muted);margin-top:auto;padding-top:8px;border-top:1px dashed var(--line-d)}
+  .item .pill{justify-content:space-between;width:100%;margin-top:6px;gap:10px;padding-inline:18px}
+  .item .pill svg{width:40px;flex:0 1 40px;min-width:14px}
+
+  /* мини-постеры в ч/б */
+  .t1{background:#e9e8e3}.t1 .a{position:absolute;left:-4%;top:14%;font-weight:900;font-size:clamp(46px,6vw,78px);line-height:.8;letter-spacing:-.07em;transform:rotate(-9deg)}
+  .t1 .b{position:absolute;right:16px;bottom:16px;width:38%;height:30%;border:5px solid var(--ink)}
+  .t2{background:#1a1a1a;color:#fff}.t2 .a{position:absolute;inset:16% 12%;border:2px solid #fff;border-radius:12px}
+  .t2 .b{position:absolute;left:20%;top:26%;width:60%;height:10px;background:#fff;box-shadow:0 22px 0 #8a8a8a,0 44px 0 #8a8a8a,0 66px 0 #5a5a5a}
+  .t2 .c{position:absolute;right:16%;bottom:22%;font-weight:900;font-size:clamp(28px,3vw,40px)}
+  .t3{background:#cfcfcb}.t3 .a{position:absolute;inset:0;background:repeating-linear-gradient(90deg,#111 0 3px,transparent 3px 7px,#111 7px 8px,transparent 8px 14px);opacity:.85;
+    -webkit-mask:linear-gradient(180deg,transparent 30%,#000 70%);mask:linear-gradient(180deg,transparent 30%,#000 70%)}
+  .t3 .b{position:absolute;left:14px;top:14px;font-weight:900;font-size:clamp(30px,3.6vw,48px);line-height:.85;letter-spacing:-.05em;text-transform:uppercase}
+  .t4{background:#f4f4f1}.t4 .a{position:absolute;left:50%;top:50%;width:46%;aspect-ratio:9/16;transform:translate(-50%,-46%) rotate(-8deg);border:6px solid #111;border-radius:26px;background:#d5d5d1}
+  .t4 .a::after{content:"";position:absolute;inset:18% 14% auto;height:24%;background:#111;border-radius:8px}
+  .t4 .b{position:absolute;left:14px;bottom:12px;font-size:11px;font-weight:700;text-transform:uppercase;line-height:1.25}
+  .t5{background:#8d8d89;color:#fff}.t5 .a{position:absolute;inset:-10%;background:radial-gradient(40% 35% at 30% 30%,#eee,transparent 70%),radial-gradient(40% 40% at 75% 70%,#222,transparent 70%);filter:url(#rough) blur(2px)}
+  .t5 .b{position:absolute;left:14px;bottom:10px;font-size:clamp(36px,4.6vw,60px);color:#111}
+  .t6{background:#e2e2de}.t6 .a{position:absolute;left:8%;top:12%;width:52%;height:62%;background:#111;transform:rotate(4deg)}
+  .t6 .b{position:absolute;right:8%;bottom:10%;width:52%;height:62%;border:4px dashed #111;transform:rotate(-5deg)}
+  .t6 .c{position:absolute;left:16%;top:30%;color:#fff;font-weight:900;font-size:clamp(20px,2.4vw,30px);line-height:.9;z-index:2}
+
+  /* ============ шаги, FAQ ============ */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .step{padding:24px;border-radius:24px;border:1px solid var(--line);background:rgba(255,255,255,.4);min-height:220px;display:flex;flex-direction:column}
+  .step .n{font-weight:700;font-size:15px;color:var(--muted)}
+  .step h3{font-size:24px;font-weight:800;letter-spacing:-.03em;margin:auto 0 10px;line-height:1}
+  .step p{color:var(--ink-2);font-size:15px;line-height:1.4}
+  details{border-bottom:1px solid var(--line-d);padding:20px 0}
+  summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;font-weight:700;font-size:clamp(18px,2.2vw,23px);letter-spacing:-.02em}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-weight:400;font-size:30px;line-height:.8;transition:.2s}
+  details[open] summary::after{transform:rotate(45deg)}
+  details p{color:var(--ink-2);margin-top:12px;font-size:16px;line-height:1.5;max-width:760px}
+  details a{text-decoration:underline}
+  footer{padding:30px 0 110px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:14px;color:var(--ink-2)}
+
+  .fab{position:fixed;right:20px;bottom:20px;z-index:60;display:flex;align-items:center;gap:10px;padding:16px 22px;border-radius:999px;background:var(--ink);color:#fff;font-weight:700;
+    box-shadow:0 14px 40px rgba(0,0,0,.25);transition:transform .2s}
+  .fab:hover{transform:translateY(-2px)}
+  .fab svg{width:20px;height:20px}
+
+  .js .rv{opacity:0;transform:translateY(22px);transition:opacity .7s, transform .7s}
+  .js .rv.in,.js .hero .rv{opacity:1;transform:none}
+
+  @media (max-width:960px){
+    .nav ul{display:none}
+    .catalog,.steps{grid-template-columns:1fr 1fr}
+    }
+  @media (max-width:600px){
+    .catalog,.steps{grid-template-columns:1fr}
+    .step{min-height:160px}
+    .hero-actions .pill{width:100%;justify-content:space-between;gap:10px}
+    .hero-actions .pill svg{flex:0 1 60px;min-width:14px}
+    .fab{font-size:0;gap:0;padding:16px;right:16px;bottom:16px}
+    .fab svg{width:22px;height:22px}
+    }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ticker-in{animation:none}.js .rv{opacity:1;transform:none;transition:none}.item:hover,.fab:hover,.pill:hover svg{transform:none}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="marble"><feTurbulence type="fractalNoise" baseFrequency=".006 .012" numOctaves="3" seed="11"/><feDisplacementMap in="SourceGraphic" scale="260"/></filter>
+  <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".045" numOctaves="3" seed="3"/><feDisplacementMap in="SourceGraphic" scale="9"/></filter>
+</svg>
+
+<!-- фон -->
+<div class="room"></div>
+<canvas id="fog"></canvas>
+<div class="mist"></div>
+<canvas id="wet"></canvas>
+<div class="grain"></div>
+
+<div class="wrap">
+  <header>
+    <nav class="nav glass">
+      <a href="#" class="logo"><i></i>Lootix</a>
+      <ul>
+        <li><a href="#catalog">Каталог</a></li>
+        <li><a href="#how">Как работаем</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <a class="tgbtn" href="https://t.me/tosvapp" data-tg target="_blank" rel="noopener"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7Z"/></svg>Telegram</a>
+    </nav>
+  </header>
+
+  <div class="ticker" aria-hidden="true"><div class="ticker-in">
+    <span>Сайты под ключ</span><span>Лендинги</span><span>Сайты-каталоги</span><span>Сайты-визитки</span><span>Портфолио</span><span>Многостраничные сайты</span><span>Редизайн</span><span>Дизайн с характером</span><span>Связь в Telegram</span>
+    <span>Сайты под ключ</span><span>Лендинги</span><span>Сайты-каталоги</span><span>Сайты-визитки</span><span>Портфолио</span><span>Многостраничные сайты</span><span>Редизайн</span><span>Дизайн с характером</span><span>Связь в Telegram</span>
+  </div></div>
+
+  <section class="hero">
+    <div class="card glass rv">
+      <div class="top"><span>Lootix Studio</span><span>01/04</span></div>
+      <h1 class="mega">LOOTIX<span class="tag" aria-hidden="true">web</span></h1>
+      <p class="slogan">Сайты, которые <mark>запоминают</mark></p>
+      <p class="lead">Делаю сайты под ключ: от лендинга за 3 дня до многостраничного сайта. Выбери формат в каталоге и напиши мне в Telegram — обсудим задачу, сроки и цену.</p>
+      <div class="hero-actions">
+        <a href="#catalog" class="pill solid">Смотреть каталог <svg aria-hidden="true" viewBox="0 0 70 12" fill="none"><path d="M0 6h68M62 1l6 5-6 5" stroke="currentColor" stroke-width="1.5"/></svg></a>
+        <a class="pill" href="https://t.me/tosvapp" data-tg target="_blank" rel="noopener">Связаться с продавцом <svg aria-hidden="true" viewBox="0 0 70 12" fill="none"><path d="M0 6h68M62 1l6 5-6 5" stroke="currentColor" stroke-width="1.5"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="catalog">
+    <div class="card glass rv">
+      <div class="top"><span>Каталог</span><span>02/04</span></div>
+      <h2 class="h2">КАТАЛОГ</h2>
+      <p class="lead" style="margin-bottom:28px">Цена зависит от задачи, поэтому её здесь нет. Нажми «Связаться с продавцом» — напиши в Telegram, и я посчитаю под тебя.</p>
+      <div class="catalog" id="catalogGrid"></div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="card glass rv">
+      <div class="top"><span>Как работаем</span><span>03/04</span></div>
+      <h2 class="h2">4 ШАГА</h2>
+      <div class="steps">
+        <div class="step"><span class="n">01/04</span><h3>Пишешь в Telegram</h3><p>Выбираешь формат в каталоге и коротко описываешь задачу.</p></div>
+        <div class="step"><span class="n">02/04</span><h3>Обсуждаем</h3><p>Уточняю детали, называю цену и сроки.</p></div>
+        <div class="step"><span class="n">03/04</span><h3>Делаю</h3><p>Показываю промежуточные версии, вношу правки.</p></div>
+        <div class="step"><span class="n">04/04</span><h3>Запускаем</h3><p>Публикую сайт на твоём домене и передаю доступы.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="card glass rv">
+      <div class="top"><span>FAQ</span><span>04/04</span></div>
+      <h2 class="h2">ВОПРОСЫ</h2>
+      <details><summary>Почему нет цен?</summary><p>Каждый проект разный: количество страниц, функции, сроки. Напиши, что нужно, и я назову точную цену.</p></details>
+      <details><summary>Как связаться?</summary><p>В Telegram: <a href="https://t.me/tosvapp" data-tg target="_blank" rel="noopener">@tosvapp</a>. Отвечаю лично.</p></details>
+      <details><summary>Сколько делается сайт?</summary><p>Лендинг, визитка, портфолио и редизайн — от 3 дней, сайт-каталог — от 5, многостраничный сайт — от недели. Точный срок скажу после обсуждения.</p></details>
+      <details><summary>Можно с моим дизайном?</summary><p>Да. Пришли макет в Figma или просто примеры, которые нравятся.</p></details>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Lootix Studio</span>
+    <span>Telegram: <a href="https://t.me/tosvapp" data-tg target="_blank" rel="noopener">@tosvapp</a></span>
+  </footer>
+</div>
+
+<a class="fab" aria-label="Связаться с продавцом в Telegram" href="https://t.me/tosvapp" data-tg target="_blank" rel="noopener">
+  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7Z"/></svg>
+  Связаться с продавцом
+</a>
+
+<script>
+/* ================= КОНТАКТ ================= */
+const TG = 'https://t.me/tosvapp';
+document.querySelectorAll('[data-tg]').forEach(a => a.href = TG);
+
+/* ================= КАТАЛОГ ================= */
+const ITEMS = [
+  { title:'Лендинг', desc:'Одна страница под продукт, услугу или рекламу: цепляющий первый экран, преимущества, отзывы, кнопка связи.', tags:['Дизайн','Адаптив','Анимации'], time:'от 3 дней',
+    art:'<div aria-hidden="true" class="thumb t1"><div class="a rough">LAND<br>ING</div><div class="b"></div>' },
+  { title:'Сайт-каталог', desc:'Витрина товаров или услуг с фото, описаниями и фильтрами. Заказ — кнопкой в Telegram или WhatsApp.', tags:['Каталог','Фильтры','Заказ в мессенджер'], time:'от 5 дней',
+    art:'<div aria-hidden="true" class="thumb t2"><div class="a"></div><div class="b"></div><div class="c">₽</div>' },
+  { title:'Сайт-визитка', desc:'3–5 страниц о тебе или компании: услуги, цены, контакты, карта проезда.', tags:['3–5 страниц','SEO','Контакты'], time:'от 3 дней',
+    art:'<div aria-hidden="true" class="thumb t3"><div class="a"></div><div class="b rough">Hello<br>world</div>' },
+  { title:'Портфолио', desc:'Личный сайт, чтобы показать работы: галерея проектов, кейсы, обо мне и контакты.', tags:['Галерея','Кейсы','Адаптив'], time:'от 3 дней',
+    art:'<div aria-hidden="true" class="thumb t4"><div class="a"></div><div class="b">portfolio<br>2026</div>' },
+  { title:'Многостраничный сайт', desc:'До 10 страниц для компании или проекта: разделы, блог, несколько языков.', tags:['До 10 страниц','Блог','Мультиязычность'], time:'от 1 недели',
+    art:'<div aria-hidden="true" class="thumb t5"><div class="a"></div><div class="b dirt">MULTI</div>' },
+  { title:'Редизайн', desc:'Освежу старый сайт: новый дизайн, быстрая загрузка, удобство на телефонах.', tags:['Аудит','Новый дизайн','Скорость'], time:'от 3 дней',
+    art:'<div aria-hidden="true" class="thumb t6"><div class="a"></div><div class="b"></div><div class="c">RE<br>DE<br>SIGN</div>' },
+];
+const arrow = '<svg aria-hidden="true" viewBox="0 0 70 12" fill="none"><path d="M0 6h68M62 1l6 5-6 5" stroke="currentColor" stroke-width="1.5"/></svg>';
+document.getElementById('catalogGrid').innerHTML = ITEMS.map((it, i) => `
+  <article class="item">
+    ${it.art}<span class="num">${String(i+1).padStart(2,'0')}/${String(ITEMS.length).padStart(2,'0')}</span><div class="grain2"></div></div>
+    <div class="info">
+      <h3>${it.title}</h3>
+      <p>${it.desc}</p>
+      <div class="tags">${it.tags.map(t => `<span>${t}</span>`).join('')}</div>
+      <div class="meta"><span>Срок</span><b>${it.time}</b></div>
+      <a class="pill solid" href="${TG}" target="_blank" rel="noopener">Связаться с продавцом ${arrow}</a>
+    </div>
+  </article>`).join('');
+
+/* ================= ЗАПОТЕВШЕЕ СТЕКЛО ================= */
+// #fog — конденсат (капли и струйки его «протирают»), #wet — капли.
+// Капли рисуются из готовых заготовок, перерисовка идёт только пока что-то стекает.
+const fog = document.getElementById('fog'), F = fog.getContext('2d');
+const wet = document.getElementById('wet'), D = wet.getContext('2d');
+const still = document.createElement('canvas'), S = still.getContext('2d');  // неподвижные капли
+const fogBase = document.createElement('canvas'), FB = fogBase.getContext('2d'); // «эталонный» туман
+const FS = .5;                      // туман мягкий — хватает половинного разрешения
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const seeded = s => () => (s = (s * 16807) % 2147483647) / 2147483647;
+let W = 0, H = 0, DPR = 1, holes = [], bigDrops = [], drips = [], dirty = true;
+
+// заготовка капли: тёмный край, светлое дно, блик сверху
+const DROP = document.createElement('canvas'); DROP.width = DROP.height = 80;
+(() => {
+  const c = DROP.getContext('2d'), r = 38; c.translate(40, 40);
+  let g = c.createRadialGradient(-r*.25, -r*.3, r*.1, 0, 0, r);
+  g.addColorStop(0, 'rgba(255,255,255,.35)'); g.addColorStop(.6, 'rgba(190,190,188,.18)'); g.addColorStop(1, 'rgba(70,70,70,.38)');
+  c.fillStyle = g; c.beginPath(); c.arc(0, 0, r, 0, 7); c.fill();
+  g = c.createRadialGradient(r*.15, r*.35, 0, r*.15, r*.35, r*.7);
+  g.addColorStop(0, 'rgba(255,255,255,.45)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+  c.fillStyle = g; c.beginPath(); c.arc(0, 0, r, 0, 7); c.fill();
+  c.fillStyle = 'rgba(255,255,255,.9)'; c.beginPath(); c.ellipse(-r*.35, -r*.4, r*.22, r*.14, -.6, 0, 7); c.fill();
+})();
+// заготовка «дырки» в тумане под каплей
+const HOLE = document.createElement('canvas'); HOLE.width = HOLE.height = 64;
+(() => {
+  const c = HOLE.getContext('2d'), g = c.createRadialGradient(32, 32, 0, 32, 32, 32);
+  g.addColorStop(0, '#000'); g.addColorStop(.8, 'rgba(0,0,0,.8)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+  c.fillStyle = g; c.fillRect(0, 0, 64, 64);
+})();
+const drop = (ctx, x, y, r, st = 1) => ctx.drawImage(DROP, x - r, y - r*st, r*2, r*2*st);
+
+function paintFogBase(){
+  const w = fogBase.width, h = fogBase.height, r = seeded(5);
+  FB.fillStyle = 'rgb(234,234,231)'; FB.fillRect(0, 0, w, h);
+  for (let i = 0; i < 26; i++){
+    const x = r()*w, y = r()*h, rad = (60 + r()*220) * FS * 2;
+    const p = FB.createRadialGradient(x, y, 0, x, y, rad);
+    const c = r() < .5 ? '250,250,248' : '214,214,211';
+    p.addColorStop(0, `rgba(${c},${.25 + r()*.3})`); p.addColorStop(1, `rgba(${c},0)`);
+    FB.fillStyle = p; FB.fillRect(x - rad, y - rad, rad*2, rad*2);
+  }
+}
+// туман прозрачен под каплями
+function punchHoles(){
+  F.globalCompositeOperation = 'destination-out';
+  for (const h of holes){ F.globalAlpha = h.a; F.drawImage(HOLE, (h.x - h.r)*FS, (h.y - h.r)*FS, h.r*2*FS, h.r*2*FS); }
+  F.globalAlpha = 1; F.globalCompositeOperation = 'source-over';
+}
+// медленное запотевание: раз в полсекунды подмешиваем эталонный туман
+function refog(){
+  F.globalCompositeOperation = 'source-over';
+  F.globalAlpha = .04; F.drawImage(fogBase, 0, 0); F.globalAlpha = 1;
+  punchHoles();
+}
+function paintStill(){
+  S.setTransform(DPR, 0, 0, DPR, 0, 0); S.clearRect(0, 0, W, H);
+  const rnd = seeded(9), area = W*H;
+  holes = []; bigDrops = [];
+  S.fillStyle = 'rgba(255,255,255,.55)';                       // морось
+  for (let i = 0, n = area/700; i < n; i++){ S.globalAlpha = .25 + rnd()*.5; S.fillRect(rnd()*W, rnd()*H, 1 + rnd(), 1 + rnd()); }
+  S.globalAlpha = 1;
+  for (let i = 0, n = area/5200; i < n; i++){                  // средние капли
+    const x = rnd()*W, y = rnd()*H, r = 1.5 + rnd()*2.8;
+    drop(S, x, y, r, 1 + rnd()*.15); holes.push({x, y, r:r*1.1, a:.6});
+  }
+  for (let i = 0, n = Math.max(10, area/42000); i < n; i++){   // крупные — из них стекают струйки
+    const x = rnd()*W, y = rnd()*H*.85, r = 4.5 + rnd()*5.5;
+    drop(S, x, y, r, 1.08 + rnd()*.18); holes.push({x, y, r:r*1.15, a:.85}); bigDrops.push({x, y, r});
+  }
+}
+function drawWet(){
+  D.setTransform(1, 0, 0, 1, 0, 0); D.clearRect(0, 0, wet.width, wet.height);
+  D.drawImage(still, 0, 0);
+  D.setTransform(DPR, 0, 0, DPR, 0, 0);
+  for (const d of drips) drop(D, d.x, d.y, d.r, 1.25);
+}
+function spawnDrip(){
+  if (!bigDrops.length || drips.length > 5) return;
+  const b = bigDrops[Math.floor(Math.random()*bigDrops.length)];
+  drips.push({x:b.x, y:b.y, r:b.r*.8, v:0, wob:Math.random()*10, pause:0});
+}
+function stepDrips(dt){
+  F.globalCompositeOperation = 'destination-out';
+  F.strokeStyle = '#000'; F.lineCap = 'round';
+  for (const d of drips){
+    if (d.pause > 0) d.pause -= dt;                            // «липкое» движение
+    else {
+      d.v = Math.min(d.v + 260*dt, 70 + d.r*14);
+      if (Math.random() < dt*.9){ d.pause = .2 + Math.random()*.9; d.v = 0; }
+    }
+    const ny = d.y + d.v*dt; d.wob += dt*2;
+    const nx = d.x + Math.sin(d.wob)*.25;
+    F.lineWidth = d.r*1.5*FS;                                   // дорожка протирает туман
+    F.beginPath(); F.moveTo(d.x*FS, d.y*FS); F.lineTo(nx*FS, ny*FS); F.stroke();
+    if (d.v > 0 && Math.random() < dt*3) drop(S, nx + (Math.random()-.5)*2, ny - d.r, .8 + Math.random()*1.4); // капельки на пути
+    d.x = nx; d.y = ny; d.r = Math.max(2.2, d.r - dt*.25);
+  }
+  F.globalCompositeOperation = 'source-over';
+  drips = drips.filter(d => d.y < H + 20);
+}
+function resize(){
+  const nw = innerWidth, nh = innerHeight;
+  // на телефоне при скролле прыгает адресная строка — из-за этого не сбрасываем стекло
+  if (W && nw === W && Math.abs(nh - H) < 150) return;
+  W = nw; H = nh; DPR = Math.min(devicePixelRatio || 1, 1.5);
+  fog.width = fogBase.width = Math.ceil(W*FS); fog.height = fogBase.height = Math.ceil(H*FS);
+  wet.width = still.width = Math.ceil(W*DPR); wet.height = still.height = Math.ceil(H*DPR);
+  paintFogBase(); paintStill();
+  F.drawImage(fogBase, 0, 0); punchHoles();
+  drips = []; drawWet();
+}
+let rT; addEventListener('resize', () => { clearTimeout(rT); rT = setTimeout(resize, 150); });
+resize();
+if (!reduce){
+  let last = performance.now(), nextDrip = 1.2;
+  setInterval(() => { if (!document.hidden) refog(); }, 500);   // запотевание не зависит от частоты кадров
+  requestAnimationFrame(function frame(now){
+    const dt = Math.min(.05, (now - last)/1000); last = now;
+    if ((nextDrip -= dt) <= 0){ spawnDrip(); nextDrip = 1.5 + Math.random()*3; }
+    if (drips.length){ stepDrips(dt); dirty = true; }
+    if (dirty){ drawWet(); dirty = drips.length > 0; }
+    requestAnimationFrame(frame);
+  });
+}
+
+/* появление секций */
+const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && e.target.classList.add('in')), {threshold:.12});
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
